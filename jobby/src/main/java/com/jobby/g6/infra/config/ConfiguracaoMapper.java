@@ -1,4 +1,4 @@
-package com.jobby.g6.config;
+package com.jobby.g6.infra.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
