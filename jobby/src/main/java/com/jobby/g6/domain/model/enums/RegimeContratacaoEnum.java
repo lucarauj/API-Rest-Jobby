@@ -1,4 +1,4 @@
-package com.jobby.g6.enums;
+package com.jobby.g6.domain.model.enums;
 
 public enum RegimeContratacaoEnum {
 
