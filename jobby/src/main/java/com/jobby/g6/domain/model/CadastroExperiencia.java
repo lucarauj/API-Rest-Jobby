@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-
 public class CadastroExperiencia {
 
     @Id
