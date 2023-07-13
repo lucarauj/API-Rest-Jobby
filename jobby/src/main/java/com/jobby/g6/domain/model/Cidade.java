@@ -2,11 +2,10 @@ package com.jobby.g6.domain.model;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Cidade {
