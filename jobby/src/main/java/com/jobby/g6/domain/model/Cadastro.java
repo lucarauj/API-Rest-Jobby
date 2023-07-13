@@ -3,14 +3,13 @@ package com.jobby.g6.domain.model;
 import com.jobby.g6.domain.model.enums.SexoEnum;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Cadastro {
@@ -37,10 +36,12 @@ public class Cadastro {
     @Column(nullable = false)
     private List<String> habilidades;
 
-    @Column(nullable = false)
-    private Profissao profissao;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cadastro_id")
+    private List<Profissao> profissao;
 
-    @Column(nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pretensao_salarial_id")
     private PretensaoSalarial pretensaoSalarial;
 
     @Enumerated(EnumType.STRING)
@@ -52,6 +53,7 @@ public class Cadastro {
     @Embedded
     private Endereco endereco;
 
-    @Column(nullable = false)
-    private CadastroExperiencia cadastroExperiencia;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cadastro_id")
+    private List<CadastroExperiencia> cadastroExperiencia;
 }
