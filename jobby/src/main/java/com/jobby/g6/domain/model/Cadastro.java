@@ -40,7 +40,8 @@ public class Cadastro {
     @JoinColumn(name = "cadastro_id")
     private List<Profissao> profissao;
 
-    @Column(nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pretensao_salarial_id")
     private PretensaoSalarial pretensaoSalarial;
 
     @Enumerated(EnumType.STRING)
@@ -52,6 +53,7 @@ public class Cadastro {
     @Embedded
     private Endereco endereco;
 
-    @Column(nullable = false)
-    private CadastroExperiencia cadastroExperiencia;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cadastro_id")
+    private List<CadastroExperiencia> cadastroExperiencia;
 }

@@ -10,7 +10,7 @@ import lombok.Data;
 public class Celular {
 
     @Column(nullable = false)
-    private Long numero;
+    private Long contato;
 
     @Column(nullable = false)
     private boolean whatsapp;

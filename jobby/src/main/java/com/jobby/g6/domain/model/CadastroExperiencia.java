@@ -4,8 +4,6 @@ import com.jobby.g6.domain.model.enums.RegimeContratacaoEnum;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Data;
-
-
 import java.time.LocalDateTime;
 
 @Entity
