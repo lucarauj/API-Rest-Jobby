@@ -8,7 +8,7 @@
 - PostgreSQL</br>
 
 <h2> Resumo Spring Initializr</h2>
-<img src="https://raw.githubusercontent.com/lucarauj/mjv-java-school-grupo06-trabalho-final/main/images/spring.io.png" width="70%"/>
+<img src="https://raw.githubusercontent.com/lucarauj/mjv-java-school-grupo06-trabalho-final/lucas/images/spring.io.png" width="70%"/>
 
 <h2>Diagrama de Classes</h2>
 <img src="https://sintaxe.netlify.app/assets/cadastro_v2.bb266c22.jpg" width="600" height="300"/>
