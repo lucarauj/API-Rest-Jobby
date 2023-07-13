@@ -3,14 +3,13 @@ package com.jobby.g6.domain.model;
 import com.jobby.g6.domain.model.enums.RegimeContratacaoEnum;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CadastroExperiencia {
 
@@ -34,8 +33,8 @@ public class CadastroExperiencia {
     @Enumerated(EnumType.STRING)
     private RegimeContratacaoEnum regimeContratacaoEnum;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
-
 
 }

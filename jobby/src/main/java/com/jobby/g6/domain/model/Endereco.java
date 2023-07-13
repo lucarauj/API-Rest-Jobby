@@ -2,12 +2,11 @@ package com.jobby.g6.domain.model;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 @Embeddable
-@Getter
-@Setter
+@Data
 public class Endereco {
 
     private Long cep;
