@@ -1,6 +1,6 @@
 # Atividade Final Jobby - Grupo 06
 
-<p>API Restfull com enfâse na proposta <a href="https://sintaxe.netlify.app/topicos/aproposta">MJV Jobby Modernização</a></p>
+<p>API Restfull com ênfase na proposta <a href="https://sintaxe.netlify.app/topicos/aproposta">MJV Jobby Modernização</a></p>
 
 <h2>Tecnologias utilizadas</h2>
 - Java 17</br>
