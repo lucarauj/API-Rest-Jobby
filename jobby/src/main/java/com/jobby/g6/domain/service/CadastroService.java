@@ -9,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -67,5 +68,9 @@ public class CadastroService{
     public Cadastro buscar(Integer cadastroId){
         return cadastroRepository.findById(cadastroId)
                 .orElseThrow(() -> new CadastroNaoEncontradoException(cadastroId));
+    }
+
+    public List<Cadastro> buscarTodos() {
+        return cadastroRepository.findAll(); // SELECT * FROM cadastro;
     }
 }

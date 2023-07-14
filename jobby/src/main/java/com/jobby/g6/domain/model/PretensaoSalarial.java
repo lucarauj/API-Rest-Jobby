@@ -9,7 +9,7 @@ import lombok.Data;
 @Entity
 public class PretensaoSalarial {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer id;
 
