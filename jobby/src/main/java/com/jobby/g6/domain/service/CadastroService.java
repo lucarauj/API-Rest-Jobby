@@ -71,6 +71,6 @@ public class CadastroService{
     }
 
     public List<Cadastro> buscarTodos() {
-        return cadastroRepository.findAll();
+        return cadastroRepository.findAll(); // SELECT * FROM cadastro;
     }
 }

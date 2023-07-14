@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/cadastros")
 public class CadastroController {
     @Autowired
-    public CadastroService cadastroService;
+    private CadastroService cadastroService;
 
     @GetMapping()
     public ResponseEntity<List<Cadastro>> getAllCadastros() {
