@@ -1,9 +1,11 @@
 package com.jobby.g6.domain.service;
 
+import com.jobby.g6.api.dto.CadastroDTO;
 import com.jobby.g6.domain.exception.CadastroNaoEncontradoException;
 import com.jobby.g6.domain.exception.NegocioException;
 import com.jobby.g6.domain.model.Cadastro;
 import com.jobby.g6.domain.repository.CadastroRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CadastroService{
@@ -18,8 +21,11 @@ public class CadastroService{
     @Autowired
     private CadastroRepository cadastroRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Transactional
-    public Cadastro salvar(Cadastro cadastro) {
+    public Cadastro salvar(CadastroDTO cadastroDTO) {
         Optional<Cadastro> cadastroExistente = cadastroRepository.findById(cadastro.getId());
 
         if(cadastroExistente.isPresent() && cadastroExistente.get().equals(cadastro)) {
@@ -42,8 +48,8 @@ public class CadastroService{
     }
 
     @Transactional
-    public Cadastro atualizar(Integer cadastroId, Cadastro novoCadastro){
-        Cadastro cadastroExistente = buscar(cadastroId);
+    public CadastroDTO atualizar(Integer cadastroId, Cadastro novoCadastro){
+        Cadastro cadastroExistente = buscarPorId(cadastroId);
 
         if(cadastroExistente!=null){
             cadastroExistente.setCpf(novoCadastro.getCpf());
@@ -65,12 +71,12 @@ public class CadastroService{
         }
     }
 
-    public Cadastro buscar(Integer cadastroId){
+    public CadastroDTO buscarPorId(Integer cadastroId){
         return cadastroRepository.findById(cadastroId)
                 .orElseThrow(() -> new CadastroNaoEncontradoException(cadastroId));
     }
 
-    public List<Cadastro> buscarTodos() {
-        return cadastroRepository.findAll(); // SELECT * FROM cadastro;
+    public List<CadastroDTO> buscarTodos() {
+        return cadastroRepository.findAll();
     }
 }

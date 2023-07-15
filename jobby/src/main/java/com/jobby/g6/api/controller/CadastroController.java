@@ -1,13 +1,13 @@
 package com.jobby.g6.api.controller;
 
+import com.jobby.g6.api.dto.CadastroDTO;
 import com.jobby.g6.domain.model.Cadastro;
 import com.jobby.g6.domain.service.CadastroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +18,27 @@ public class CadastroController {
     private CadastroService cadastroService;
 
     @GetMapping()
-    public ResponseEntity<List<Cadastro>> getAllCadastros() {
+    public ResponseEntity<List<CadastroDTO>> getAllCadastros() {
         return ResponseEntity.status(HttpStatus.OK).body(cadastroService.buscarTodos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CadastroDTO> getById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.buscarPorId(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<CadastroDTO> create(@Valid @RequestBody CadastroDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(cadastroService.salvar(dto));
+    }
+
+    @PutMapping
+    public ResponseEntity<CadastroDTO> update(@Valid @RequestBody CadastroDTO dto, @PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.atualizar(id, dto));
+    }
+
+    @DeleteMapping
+    public ResponseEntity delete(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cadastroService.deletar(id));
     }
 }
