@@ -1,4 +1,4 @@
-package com.jobby.g6.api.dto;
+package com.jobby.g6.api.dto.input;
 
 import com.jobby.g6.domain.model.*;
 import com.jobby.g6.domain.model.enums.SexoEnum;
@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record CadastroDTO(
+public record CadastroInputDTO(
         @NotBlank(message = "{nome.obrigatorio}")
         String nome,
         @NotBlank(message = "{cpf.obrigatorio}")
@@ -22,11 +22,11 @@ public record CadastroDTO(
         @Email(message = "{email.invalido}")
         String email,
         @NotBlank List<String> habilidades,
-        @NotBlank Profissao profissao,
-        @NotNull PretensaoSalarial pretensaoSalarial,
+        @NotNull List<ProfissaoInputDTO> profissao,
+        @NotNull List<PretensaoSalariaInputlDTO> pretensaoSalarial,
         @NotNull SexoEnum sexoEnum,
         @NotNull(message = "{celular.obrigatorio}") Celular celular,
         @NotNull(message = "{endereco.obrigatorio}") Endereco endereco,
-        @NotNull CadastroExperiencia cadastroExperiencia
+        @NotNull List<CadastroExperienciaInputDTO> cadastroExperiencia
 ) {
 }

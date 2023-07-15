@@ -1,4 +1,3 @@
--- Cria as tabelas
 CREATE TABLE public.cidade (
 	id SERIAL,
 	estado varchar(255) NOT NULL,
@@ -7,7 +6,6 @@ CREATE TABLE public.cidade (
 	CONSTRAINT cidade_pkey PRIMARY KEY (id)
 );
 
--- Cria tabela cidade
 CREATE TABLE public.empresa (
 	id SERIAL,
 	nome varchar(255) NOT NULL,
@@ -33,7 +31,7 @@ CREATE TABLE public.cadastro (
 	complemento varchar(255) NULL,
 	logradouro varchar(255) NULL,
 	numero varchar(255) NULL,
-	habilidades _varchar NOT NULL,
+	habilidades varchar[] NOT NULL,
 	nome varchar(255) NOT NULL,
 	sexo_enum varchar(255) NULL,
 	telefone int8 NOT NULL,
