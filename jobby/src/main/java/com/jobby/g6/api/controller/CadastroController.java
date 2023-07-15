@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,8 +30,10 @@ public class CadastroController {
     }
 
     @PostMapping
-    public ResponseEntity<CadastroDTO> create(@Valid @RequestBody CadastroDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(cadastroService.salvar(dto));
+    public ResponseEntity<CadastroDTO> create(@Valid @RequestBody CadastroDTO dto, UriComponentsBuilder uriBuilder) {
+        var cadastro = cadastroService.salvar(dto);
+        URI endereco = uriBuilder.path("cadastros/{id}").buildAndExpand(cadastro.getId()).toUri();
+        return ResponseEntity.status(HttpStatus.CREATED).body(cadastro);
     }
 
     @PutMapping
