@@ -38,7 +38,8 @@ public class CadastroController {
     }
 
     @DeleteMapping
-    public ResponseEntity delete(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cadastroService.deletar(id));
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        cadastroService.deletar(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
