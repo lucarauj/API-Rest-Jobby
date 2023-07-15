@@ -1,6 +1,11 @@
 package com.jobby.g6.api.controller;
 
-import com.jobby.g6.api.dto.input.CadastroInputDTO;
+import com.jobby.g6.api.dto.assemblers.CadastroAssembler;
+import com.jobby.g6.api.dto.assemblers.CadastroDisassembler;
+import com.jobby.g6.api.dto.model.CadastroModel;
+import com.jobby.g6.api.dto.model.input.CadastroInput;
+import com.jobby.g6.domain.exception.CadastroNaoEncontradoException;
+import com.jobby.g6.domain.exception.NegocioException;
 import com.jobby.g6.domain.model.Cadastro;
 import com.jobby.g6.domain.service.CadastroService;
 import org.springframework.beans.BeanUtils;
@@ -16,23 +21,35 @@ public class CadastroController {
     @Autowired
     private CadastroService cadastroService;
 
+    @Autowired
+    private CadastroAssembler cadastroAssembler;
+
+    @Autowired
+    private CadastroDisassembler cadastroDisassembler;
+
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<Cadastro> listarTodos() {
-        return cadastroService.buscarTodos();
+    public List<CadastroModel> listarTodos() {
+        List<Cadastro> cadastros = cadastroService.buscarTodos();
+        return cadastroAssembler.toCollectionModel(cadastros);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Cadastro buscarPorId(@PathVariable Integer id){
-        return cadastroService.buscar(id);
+    public CadastroModel buscarPorId(@PathVariable Integer id){
+        Cadastro cadastro = cadastroService.buscar(id);
+        return cadastroAssembler.toModel(cadastro);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cadastro criar(@RequestBody CadastroInputDTO cadastroInputDTO){
-        Cadastro cadastro = new Cadastro();
-        BeanUtils.copyProperties(cadastroInputDTO, cadastro);
-        return cadastroService.salvar(cadastro);
+    public CadastroModel criar(@RequestBody CadastroInput cadastroInput){
+        try{
+            Cadastro cadastro = cadastroDisassembler.toDomainObject(cadastroInput);
+
+            return cadastroAssembler.toModel(cadastroService.salvar(cadastro));
+        }catch (CadastroNaoEncontradoException e){
+            throw new NegocioException(e.getMessage());
+        }
     }
 }

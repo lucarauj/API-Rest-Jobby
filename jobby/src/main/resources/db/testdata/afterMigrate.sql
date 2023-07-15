@@ -1,4 +1,4 @@
-TRUNCATE TABLE cidade, empresa, pretensao_salarial, cadastro, profissao, cadastro_experiencia RESTART IDENTITY;
+TRUNCATE TABLE cidade, empresa, cadastro, profissao, cadastro_experiencia RESTART IDENTITY;
 
 
 INSERT INTO public.cidade(estado, nome, sigla)
@@ -43,18 +43,15 @@ VALUES ('Empresa A'),
 	   ('Empresa B'),
 	   ('Empresa C');
 
-INSERT INTO public.pretensao_salarial(valor_maximo, valor_minimo)
-VALUES (5000.0, 3000.0),
-	   (8000.0, 6000.0),
-	   (4000.0, 2500.0);
+INSERT INTO public.profissao(nome)
+VALUES ('Engenheiro'),
+       ('Desenvolvedor');
 
-INSERT INTO public.cadastro(contato, whatsapp, cpf, data_nascimento, email, bairro, cep, complemento, logradouro, numero, habilidades, nome, sexo_enum, telefone, cidade_id, pretensao_salarial_id)
-VALUES (1, true, '12345678901', '1990-01-01 00:00:00', 'exemplo1@email.com', 'Bairro 1', 12345, 'Complemento 1', 'Rua 1', '123', '{"Habilidade 1", "Habilidade 2"}', 'João Silva', 'MASCULINO', 987654321, 1, 1),
-	   (2, false, '98765432109', '1995-05-10 12:34:56', 'exemplo2@email.com', 'Bairro 2', 54321, 'Complemento 2', 'Rua 2', '456', '{"Habilidade 3", "Habilidade 4"}', 'Maria Souza', 'FEMININO', 123456789, 2, 2);
+INSERT INTO public.cadastro(contato, whatsapp, cpf, data_nascimento, email, bairro, cep, complemento, logradouro, numero, habilidades, nome, sexo_enum, telefone, cidade_id, valor_minimo, valor_maximo, profissao_id)
+VALUES (1, true, '12345678901', '1990-01-01 00:00:00', 'exemplo1@email.com', 'Bairro 1', 12345, 'Complemento 1', 'Rua 1', '123', '{"Habilidade 1", "Habilidade 2"}', 'João Silva', 'MASCULINO', 987654321, 1, 1500, 5000, 1),
+	   (2, false, '98765432109', '1995-05-10 12:34:56', 'exemplo2@email.com', 'Bairro 2', 54321, 'Complemento 2', 'Rua 2', '456', '{"Habilidade 3", "Habilidade 4"}', 'Maria Souza', 'FEMININO', 123456789, 2, 3000,5400, 2);
 
-INSERT INTO public.profissao(nome, cadastro_id)
-VALUES ('Engenheiro', 1),
-	   ('Desenvolvedor', 2);
+
 
 INSERT INTO public.cadastro_experiencia(data_contratacao, desligamento, emprego_atual, regime_contratacao_enum, salario, empresa_id, cadastro_id)
 VALUES ('2021-01-01 00:00:00', '2022-03-15 00:00:00',  false,  'CLT',  5000.0,  1,  1),

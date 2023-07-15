@@ -10,9 +10,6 @@ ON cidade(id);
 create index idx_empresas_id
 ON empresa(id);
 
-create index idx_pretensoes_salariais_id
-ON pretensao_salarial(id);
-
 create index idx_profissoes_id
 ON profissao(id);
 

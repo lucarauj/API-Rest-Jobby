@@ -36,12 +36,11 @@ public class Cadastro {
     @Column(nullable = false)
     private List<String> habilidades;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cadastro_id")
-    private List<Profissao> profissao;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profissao_id")
+    private Profissao profissao;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "pretensao_salarial_id")
+    @Embedded
     private PretensaoSalarial pretensaoSalarial;
 
     @Enumerated(EnumType.STRING)
@@ -53,7 +52,7 @@ public class Cadastro {
     @Embedded
     private Endereco endereco;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cadastro_id")
     private List<CadastroExperiencia> cadastroExperiencia;
 }

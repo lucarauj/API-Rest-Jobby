@@ -22,12 +22,6 @@ public class CadastroService{
     public Cadastro salvar(Cadastro cadastro) {
         Optional<Cadastro> cadastroExistente = cadastroRepository.findById(cadastro.getId());
 
-        if(cadastroExistente.isPresent() && cadastroExistente.get().equals(cadastro)) {
-            throw new NegocioException(
-                    String.format("Já existe um cadastro para esse código: %d", cadastroExistente)
-            );
-        }
-
         return cadastroRepository.save(cadastro);
     }
 
