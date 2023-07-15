@@ -2,6 +2,7 @@ package com.jobby.g6.api.dto.input;
 
 import com.jobby.g6.domain.model.*;
 import com.jobby.g6.domain.model.enums.SexoEnum;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,11 +23,11 @@ public record CadastroInputDTO(
         @Email(message = "{email.invalido}")
         String email,
         @NotBlank List<String> habilidades,
-        @NotNull List<ProfissaoInputDTO> profissao,
-        @NotNull List<PretensaoSalariaInputlDTO> pretensaoSalarial,
+        @NotNull(message = "profissao obrigatoria") ProfissaoInputDTO profissao,
+        @NotNull(message = "pretensao obrigatoria") PretensaoSalariaInputlDTO pretensaoSalarial,
         @NotNull SexoEnum sexoEnum,
         @NotNull(message = "{celular.obrigatorio}") Celular celular,
         @NotNull(message = "{endereco.obrigatorio}") Endereco endereco,
-        @NotNull List<CadastroExperienciaInputDTO> cadastroExperiencia
+        List<CadastroExperienciaInputDTO> cadastroExperiencia
 ) {
 }
