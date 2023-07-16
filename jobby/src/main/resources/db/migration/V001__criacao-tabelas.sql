@@ -1,4 +1,3 @@
--- Cria as tabelas
 CREATE TABLE public.cidade (
 	id SERIAL,
 	estado varchar(255) NOT NULL,
@@ -7,18 +6,10 @@ CREATE TABLE public.cidade (
 	CONSTRAINT cidade_pkey PRIMARY KEY (id)
 );
 
--- Cria tabela cidade
 CREATE TABLE public.empresa (
 	id SERIAL,
 	nome varchar(255) NOT NULL,
 	CONSTRAINT empresa_pkey PRIMARY KEY (id)
-);
-
-CREATE TABLE public.pretensao_salarial (
-	id SERIAL,
-	valor_maximo float8 NOT NULL,
-	valor_minimo float8 NOT NULL,
-	CONSTRAINT pretensao_salarial_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE public.cadastro (
@@ -33,16 +24,15 @@ CREATE TABLE public.cadastro (
 	complemento varchar(255) NULL,
 	logradouro varchar(255) NULL,
 	numero varchar(255) NULL,
-	habilidades _varchar NOT NULL,
+	habilidades varchar[] NOT NULL,
 	nome varchar(255) NOT NULL,
 	sexo_enum varchar(255) NULL,
 	telefone int8 NOT NULL,
 	cidade_id int4 NULL,
-	pretensao_salarial_id int4 NULL,
+	valor_minimo float8 NOT NULL,
+	valor_maximo float8 NOT NULL,
 	CONSTRAINT cadastro_pkey PRIMARY KEY (id),
 	CONSTRAINT cadastro_sexo_enum_check CHECK (((sexo_enum)::text = ANY ((ARRAY['MASCULINO'::character varying, 'FEMININO'::character varying])::text[]))),
-	CONSTRAINT uk_q024w7sjymwwu6hi8lf8pqrxs UNIQUE (pretensao_salarial_id),
-	CONSTRAINT fk77jmm3ksh0n76r2b9byip6bfp FOREIGN KEY (pretensao_salarial_id) REFERENCES public.pretensao_salarial(id),
 	CONSTRAINT fkjx8jpsixkalofngbn4psigw4r FOREIGN KEY (cidade_id) REFERENCES public.cidade(id)
 );
 
