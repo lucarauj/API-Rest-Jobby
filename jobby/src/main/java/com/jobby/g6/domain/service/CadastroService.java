@@ -46,30 +46,6 @@ public class CadastroService{
         }
     }
 
-    @Transactional
-    public Cadastro atualizar(Integer cadastroId, Cadastro novoCadastro){
-        Cadastro cadastroExistente = buscar(cadastroId);
-
-        if(cadastroExistente!=null){
-            cadastroExistente.setCpf(novoCadastro.getCpf());
-            cadastroExistente.setNome(novoCadastro.getNome());
-            cadastroExistente.setDataNascimento(novoCadastro.getDataNascimento());
-            cadastroExistente.setTelefone(novoCadastro.getTelefone());
-            cadastroExistente.setEmail(novoCadastro.getEmail());
-            cadastroExistente.setHabilidades(novoCadastro.getHabilidades());
-            cadastroExistente.setProfissao(novoCadastro.getProfissao());
-            cadastroExistente.setPretensaoSalarial(novoCadastro.getPretensaoSalarial());
-            cadastroExistente.setSexoEnum(novoCadastro.getSexoEnum());
-            cadastroExistente.setCelular(novoCadastro.getCelular());
-            cadastroExistente.setEndereco(novoCadastro.getEndereco());
-            cadastroExistente.setCadastroExperiencia(novoCadastro.getCadastroExperiencia());
-
-            return salvar(cadastroExistente);
-        }else{
-            throw new CadastroNaoEncontradoException(cadastroId);
-        }
-    }
-
     public Cadastro buscar(Integer cadastroId){
         return cadastroRepository.findById(cadastroId)
                 .orElseThrow(() -> new CadastroNaoEncontradoException(cadastroId));

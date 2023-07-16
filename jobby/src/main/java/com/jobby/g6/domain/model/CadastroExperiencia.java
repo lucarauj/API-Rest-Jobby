@@ -35,4 +35,7 @@ public class CadastroExperiencia {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
+    @ManyToOne
+    @JoinColumn(name = "cadastro_id")
+    private Cadastro cadastro;
 }

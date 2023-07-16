@@ -7,6 +7,7 @@ import lombok.Data;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -55,4 +56,15 @@ public class Cadastro {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cadastro_id")
     private List<CadastroExperiencia> cadastroExperiencia;
+
+    public void adicionarExperiencia(CadastroExperiencia cadastroExperiencia) {
+        if (cadastroExperiencia != null) {
+            if (this.cadastroExperiencia == null) {
+                this.cadastroExperiencia = new ArrayList<>();
+            }
+            cadastroExperiencia.setCadastro(this);
+            this.cadastroExperiencia.add(cadastroExperiencia);
+        }
+    }
+
 }
