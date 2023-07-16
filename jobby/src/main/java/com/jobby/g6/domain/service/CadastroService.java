@@ -2,6 +2,7 @@ package com.jobby.g6.domain.service;
 
 import com.jobby.g6.domain.exception.CadastroNaoEncontradoException;
 import com.jobby.g6.domain.exception.NegocioException;
+import com.jobby.g6.domain.exception.ProfissaoNaoEncontradoException;
 import com.jobby.g6.domain.model.Cadastro;
 import com.jobby.g6.domain.model.Profissao;
 import com.jobby.g6.domain.repository.CadastroRepository;
@@ -28,8 +29,8 @@ public class CadastroService{
     public Cadastro salvar(Cadastro cadastro) {
         if (cadastro.getProfissao() != null && cadastro.getProfissao().getId() != null) {
             Profissao profissao = profissaoRepository.findById(cadastro.getProfissao().getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Profissao não encontrada"));
-            cadastro.setProfissao(profissao);
+                    .orElseThrow(() -> new ProfissaoNaoEncontradoException(cadastro.getProfissao().getId()));
+            cadastro.   setProfissao(profissao);
         }
 
         return cadastroRepository.save(cadastro);

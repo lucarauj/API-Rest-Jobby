@@ -3,7 +3,6 @@ package com.jobby.g6.api.dto.model.input;
 import com.jobby.g6.domain.model.Celular;
 import com.jobby.g6.domain.model.Endereco;
 import com.jobby.g6.domain.model.PretensaoSalarial;
-import com.jobby.g6.domain.model.Profissao;
 import com.jobby.g6.domain.model.enums.SexoEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

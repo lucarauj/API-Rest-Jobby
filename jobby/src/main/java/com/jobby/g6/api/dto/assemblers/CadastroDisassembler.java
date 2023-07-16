@@ -4,7 +4,6 @@ import com.jobby.g6.api.dto.model.input.CadastroInput;
 import com.jobby.g6.domain.model.Cadastro;
 import com.jobby.g6.domain.model.Profissao;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +31,7 @@ public class CadastroDisassembler {
         cadastro.setEndereco(cadastroInput.getEndereco());
 
         return cadastro;
-        
+
     }
 
     public void copyToDomainObject(CadastroInput cadastroInput, Cadastro cadastro){
