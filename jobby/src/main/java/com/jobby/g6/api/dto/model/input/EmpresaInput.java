@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProfissaoIdInput {
-    @NotNull
-    private Integer id;
+public class EmpresaInput {
+    @NotNull(message = "{id.obrigatorio}")
+    Integer id;
 }

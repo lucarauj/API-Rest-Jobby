@@ -8,6 +8,7 @@ import com.jobby.g6.domain.exception.CadastroNaoEncontradoException;
 import com.jobby.g6.domain.exception.NegocioException;
 import com.jobby.g6.domain.model.Cadastro;
 import com.jobby.g6.domain.service.CadastroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,10 +44,9 @@ public class CadastroController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CadastroModel criar(@RequestBody CadastroInput cadastroInput){
+    public CadastroModel criar(@RequestBody @Valid CadastroInput cadastroInput){
         try{
             Cadastro cadastro = cadastroDisassembler.toDomainObject(cadastroInput);
-
             return cadastroAssembler.toModel(cadastroService.salvar(cadastro));
         }catch (CadastroNaoEncontradoException e){
             throw new NegocioException(e.getMessage());

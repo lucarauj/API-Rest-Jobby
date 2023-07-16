@@ -41,5 +41,5 @@ public class CadastroModel {
 
     private Endereco endereco;
 
-//    private List<CadastroExperienciaInputDTO> cadastroExperiencia;
+    private List<CadastroExperienciaModel> cadastroExperiencia;
 }
