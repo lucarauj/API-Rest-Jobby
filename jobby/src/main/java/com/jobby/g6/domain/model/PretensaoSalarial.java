@@ -5,14 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Data;
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
+@Embeddable
 public class PretensaoSalarial {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Integer id;
-
     @Column(nullable = false)
     private Double valorMinimo;
 
