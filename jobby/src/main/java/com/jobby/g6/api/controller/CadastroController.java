@@ -52,4 +52,16 @@ public class CadastroController {
             throw new NegocioException(e.getMessage());
         }
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CadastroModel atualizar(@PathVariable Integer id, @RequestBody @Valid CadastroInput cadastroInput){
+        Cadastro cadastroAtual = cadastroService.buscar(id);
+        cadastroDisassembler.copyToDomainObject(cadastroInput, cadastroAtual);
+        try{
+            return cadastroAssembler.toModel(cadastroService.salvar(cadastroAtual));
+        }catch (CadastroNaoEncontradoException e){
+            throw new CadastroNaoEncontradoException(e.getMessage());
+        }
+    }
 }
