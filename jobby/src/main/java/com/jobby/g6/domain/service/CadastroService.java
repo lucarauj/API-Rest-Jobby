@@ -3,7 +3,9 @@ package com.jobby.g6.domain.service;
 import com.jobby.g6.domain.exception.CadastroNaoEncontradoException;
 import com.jobby.g6.domain.exception.NegocioException;
 import com.jobby.g6.domain.model.Cadastro;
+import com.jobby.g6.domain.model.Profissao;
 import com.jobby.g6.domain.repository.CadastroRepository;
+import com.jobby.g6.domain.repository.ProfissaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,17 @@ public class CadastroService{
     @Autowired
     private CadastroRepository cadastroRepository;
 
+    @Autowired
+    private ProfissaoRepository profissaoRepository;
+
+
     @Transactional
     public Cadastro salvar(Cadastro cadastro) {
-        Optional<Cadastro> cadastroExistente = cadastroRepository.findById(cadastro.getId());
+        if (cadastro.getProfissao() != null && cadastro.getProfissao().getId() != null) {
+            Profissao profissao = profissaoRepository.findById(cadastro.getProfissao().getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Profissao não encontrada"));
+            cadastro.setProfissao(profissao);
+        }
 
         return cadastroRepository.save(cadastro);
     }
