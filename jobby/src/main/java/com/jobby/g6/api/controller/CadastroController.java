@@ -42,6 +42,13 @@ public class CadastroController {
         return cadastroAssembler.toModel(cadastro);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable Integer id){
+        cadastroService.deletar(id);
+
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CadastroModel criar(@RequestBody @Valid CadastroInput cadastroInput){
@@ -50,6 +57,18 @@ public class CadastroController {
             return cadastroAssembler.toModel(cadastroService.salvar(cadastro));
         }catch (CadastroNaoEncontradoException e){
             throw new NegocioException(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CadastroModel atualizar(@PathVariable Integer id, @RequestBody @Valid CadastroInput cadastroInput){
+        Cadastro cadastroAtual = cadastroService.buscar(id);
+        cadastroDisassembler.copyToDomainObject(cadastroInput, cadastroAtual);
+        try{
+            return cadastroAssembler.toModel(cadastroService.salvar(cadastroAtual));
+        }catch (CadastroNaoEncontradoException e){
+            throw new CadastroNaoEncontradoException(e.getMessage());
         }
     }
 }
