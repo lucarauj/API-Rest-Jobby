@@ -77,4 +77,11 @@ public class CadastroExperienciaController {
 
     }
 
+    @DeleteMapping("/{cadastroExperienciaId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable Integer cadastroId, @PathVariable Integer cadastroExperienciaId){
+        cadastroExperienciaService.deletar(cadastroExperienciaId);
+
+    }
+
 }

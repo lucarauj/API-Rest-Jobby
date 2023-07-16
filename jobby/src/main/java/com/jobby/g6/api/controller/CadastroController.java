@@ -42,6 +42,13 @@ public class CadastroController {
         return cadastroAssembler.toModel(cadastro);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable Integer id){
+        cadastroService.deletar(id);
+
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CadastroModel criar(@RequestBody @Valid CadastroInput cadastroInput){

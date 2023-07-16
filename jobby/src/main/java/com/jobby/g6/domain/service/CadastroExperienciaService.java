@@ -1,9 +1,11 @@
 package com.jobby.g6.domain.service;
 
 import com.jobby.g6.domain.exception.CadastroExperienciaNaoEncontradoException;
+import com.jobby.g6.domain.exception.CadastroNaoEncontradoException;
 import com.jobby.g6.domain.model.CadastroExperiencia;
 import com.jobby.g6.domain.repository.CadastroExperienciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,5 +29,15 @@ public class CadastroExperienciaService {
     @Transactional
     public CadastroExperiencia salvar(CadastroExperiencia cadastroExperiencia){
         return cadastroExperienciaRepository.save(cadastroExperiencia);
+    }
+
+    @Transactional
+    public void deletar(Integer cadastroExperienciaId){
+        try{
+            cadastroExperienciaRepository.deleteById(cadastroExperienciaId);
+            cadastroExperienciaRepository.flush();
+        }catch (EmptyResultDataAccessException e){
+            throw new CadastroNaoEncontradoException(cadastroExperienciaId);
+        }
     }
 }
