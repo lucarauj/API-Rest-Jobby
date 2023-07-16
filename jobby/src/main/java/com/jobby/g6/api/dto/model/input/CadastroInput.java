@@ -4,7 +4,6 @@ import com.jobby.g6.domain.model.Celular;
 import com.jobby.g6.domain.model.Endereco;
 import com.jobby.g6.domain.model.PretensaoSalarial;
 import com.jobby.g6.domain.model.enums.SexoEnum;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,11 +35,10 @@ public class CadastroInput {
     @Email(message = "{email.invalido}")
     private String email;
 
-    @NotBlank
     private List<String> habilidades;
 
-    @NotNull
-    private Integer profissaoId;
+    @NotNull(message = "{profissao.obrigatoria}")
+    private ProfissaoInput profissaoInput;
 
     @NotNull
     private PretensaoSalarial pretensaoSalarial;
