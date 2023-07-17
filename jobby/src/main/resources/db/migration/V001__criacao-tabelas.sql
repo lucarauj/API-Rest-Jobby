@@ -31,6 +31,7 @@ CREATE TABLE public.cadastro (
 	cidade_id int4 NULL,
 	valor_minimo float8 NOT NULL,
 	valor_maximo float8 NOT NULL,
+	profissao_id int4 NOT NULL,
 	CONSTRAINT cadastro_pkey PRIMARY KEY (id),
 	CONSTRAINT cadastro_sexo_enum_check CHECK (((sexo_enum)::text = ANY ((ARRAY['MASCULINO'::character varying, 'FEMININO'::character varying])::text[]))),
 	CONSTRAINT fkjx8jpsixkalofngbn4psigw4r FOREIGN KEY (cidade_id) REFERENCES public.cidade(id)

@@ -51,8 +51,6 @@ INSERT INTO public.cadastro(contato, whatsapp, cpf, data_nascimento, email, bair
 VALUES (1, true, '12345678901', '1990-01-01 00:00:00', 'exemplo1@email.com', 'Bairro 1', 12345, 'Complemento 1', 'Rua 1', '123', '{"Habilidade 1", "Habilidade 2"}', 'João Silva', 'MASCULINO', 987654321, 1, 1500, 5000, 1),
 	   (2, false, '98765432109', '1995-05-10 12:34:56', 'exemplo2@email.com', 'Bairro 2', 54321, 'Complemento 2', 'Rua 2', '456', '{"Habilidade 3", "Habilidade 4"}', 'Maria Souza', 'FEMININO', 123456789, 2, 3000,5400, 2);
 
-
-
 INSERT INTO public.cadastro_experiencia(data_contratacao, desligamento, emprego_atual, regime_contratacao_enum, salario, empresa_id, cadastro_id)
 VALUES ('2021-01-01 00:00:00', '2022-03-15 00:00:00',  false,  'CLT',  5000.0,  1,  1),
 	   ('2020-05-10 00:00:00', '2023-07-01 00:00:00',  true,  'PJ',  8000.0,  2,  2),
