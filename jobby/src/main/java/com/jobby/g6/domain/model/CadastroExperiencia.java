@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class CadastroExperiencia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer id;
 
@@ -35,4 +35,7 @@ public class CadastroExperiencia {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
+    @ManyToOne
+    @JoinColumn(name = "cadastro_id")
+    private Cadastro cadastro;
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.List;
 @Entity
 public class Cadastro {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer id;
 
@@ -36,12 +37,11 @@ public class Cadastro {
     @Column(nullable = false)
     private List<String> habilidades;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cadastro_id")
-    private List<Profissao> profissao;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profissao_id")
+    private Profissao profissao;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "pretensao_salarial_id")
+    @Embedded
     private PretensaoSalarial pretensaoSalarial;
 
     @Enumerated(EnumType.STRING)
@@ -53,7 +53,18 @@ public class Cadastro {
     @Embedded
     private Endereco endereco;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cadastro_id")
     private List<CadastroExperiencia> cadastroExperiencia;
+
+    public void adicionarExperiencia(CadastroExperiencia cadastroExperiencia) {
+        if (cadastroExperiencia != null) {
+            if (this.cadastroExperiencia == null) {
+                this.cadastroExperiencia = new ArrayList<>();
+            }
+            cadastroExperiencia.setCadastro(this);
+            this.cadastroExperiencia.add(cadastroExperiencia);
+        }
+    }
+
 }
